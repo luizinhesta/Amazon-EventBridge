@@ -1,0 +1,9 @@
+{
+  "InputPathsMap": {
+    "correlationId": "$.detail.correlationId",
+    "orderId": "$.detail.data.orderId",
+    "amount": "$.detail.data.amount",
+    "reason": "$.detail.data.reason"
+  },
+  "InputTemplate": "\"[PEDIDOS] Pagamento falhou correlationId=<correlationId> pedido=<orderId> valor=<amount> motivo=<reason>\""
+}

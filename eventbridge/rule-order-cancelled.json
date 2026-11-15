@@ -1,0 +1,4 @@
+{
+  "source": ["integracao.lab01.pedidos"],
+  "detail-type": ["order.cancelled"]
+}

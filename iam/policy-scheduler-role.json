@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SchedulerPublicaNoBusDoLab",
+      "Effect": "Allow",
+      "Action": "events:PutEvents",
+      "Resource": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:event-bus/<PREFIXO>-bus"
+    }
+  ]
+}

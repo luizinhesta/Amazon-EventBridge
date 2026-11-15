@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GravarEvidenciaDeAuditoria",
+      "Effect": "Allow",
+      "Action": "dynamodb:PutItem",
+      "Resource": "arn:aws:dynamodb:<REGIAO>:<ACCOUNT_ID>:table/<PREFIXO>-runs"
+    }
+  ]
+}

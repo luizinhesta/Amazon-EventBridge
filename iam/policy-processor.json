@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ConsumirFilaDeProcessamento",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:ChangeMessageVisibility"
+      ],
+      "Resource": "arn:aws:sqs:<REGIAO>:<ACCOUNT_ID>:<PREFIXO>-proc-queue"
+    },
+    {
+      "Sid": "GravarEvidenciaDeProcessamento",
+      "Effect": "Allow",
+      "Action": "dynamodb:PutItem",
+      "Resource": "arn:aws:dynamodb:<REGIAO>:<ACCOUNT_ID>:table/<PREFIXO>-runs"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --accent: #38bdf8;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --ok: #4ade80;
+  --warn: #fbbf24;
+  --err: #f87171;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+header, main, footer { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; }
+header h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+.foco { color: var(--muted); margin: 0; }
+.banner-demo {
+  margin-top: .75rem; padding: .5rem .75rem; border-radius: 6px;
+  background: var(--warn); color: #1f2937; font-weight: 700; letter-spacing: .5px;
+}
+.painel {
+  background: var(--card); border-radius: 10px; padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem; border: 1px solid #334155;
+}
+.painel h2 { margin-top: 0; font-size: 1.1rem; }
+h3 { font-size: .95rem; margin: 1rem 0 .4rem; color: var(--muted); font-weight: 600; }
+.instrucao { color: var(--muted); font-size: .9rem; }
+.controles { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+select, button {
+  font-size: .95rem; padding: .55rem .8rem; border-radius: 6px; border: 1px solid #475569;
+  background: #0b1220; color: var(--text);
+}
+button {
+  background: var(--accent); color: #0b1220; font-weight: 700; cursor: pointer; border: none;
+}
+button.secundario { background: transparent; color: var(--text); border: 1px solid #475569; }
+button:hover { filter: brightness(1.08); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--warn); outline-offset: 2px; }
+.status { min-height: 1.2rem; font-size: .9rem; color: var(--muted); }
+.status.erro { color: var(--err); }
+.status.ok { color: var(--ok); }
+
+.auth-linha { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.auth-usuario { margin: 0; font-weight: 700; }
+.auth-detalhe { margin: .1rem 0 0; color: var(--muted); font-size: .85rem; }
+.perfil { display: inline-block; padding: .05rem .6rem; border-radius: 999px; font-weight: 700; font-size: .8rem; background: #334155; color: var(--text); }
+.perfil.operador { background: var(--ok); color: #052e16; }
+.perfil.leitor { background: var(--accent); color: #0b1220; }
+
+.metricas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.metrica {
+  background: #0b1220; border: 1px solid #334155; border-radius: 8px;
+  padding: .75rem 1rem; min-width: 140px; display: flex; flex-direction: column;
+}
+.metrica .rotulo { color: var(--muted); font-size: .8rem; }
+.metrica .valor { font-size: 1.6rem; font-weight: 700; }
+.chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+.chip { background: #0b1220; border: 1px solid #334155; border-radius: 999px; padding: .2rem .7rem; font-size: .85rem; }
+
+.tabela-rolavel { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid #334155; vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+td.vazio, .vazio { color: var(--muted); }
+td.vazio { text-align: center; padding: 1.5rem; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.sem-dado { color: var(--muted); font-style: italic; }
+
+.estado { font-weight: 700; white-space: nowrap; }
+.estado.CONFIRMADO { color: var(--ok); }
+.estado.AGUARDANDO, .estado.PARCIAL { color: var(--warn); }
+.estado.INCOMPLETO, .estado.SEM_EVIDENCIA, .estado.FALHA { color: var(--err); }
+.estado.SEM_DESTINO { color: var(--accent); }
+.estado.INESPERADO { color: #f472b6; }
+.estado.NAO_VERIFICAVEL, .estado.SEM_REGISTRO_PUBLICACAO, .estado.DESCONHECIDO { color: var(--muted); }
+
+details summary { cursor: pointer; color: var(--accent); }
+details ul { margin: .4rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: var(--muted); }
+.st-confirmado { color: var(--ok); }
+.st-aguardando { color: var(--warn); }
+.st-ausente, .st-falha { color: var(--err); }
+.st-nao_verificavel { color: var(--muted); }
+
+footer p { color: var(--muted); font-size: .8rem; }
+code { background: #0b1220; padding: .1rem .35rem; border-radius: 4px; }

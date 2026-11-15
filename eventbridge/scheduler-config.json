@@ -1,0 +1,16 @@
+{
+  "Name": "<PREFIXO>-schedule",
+  "GroupName": "default",
+  "ScheduleExpression": "rate(10 minutes)",
+  "FlexibleTimeWindow": { "Mode": "OFF" },
+  "State": "ENABLED",
+  "Target": {
+    "Arn": "arn:aws:scheduler:::aws-sdk:eventbridge:putEvents",
+    "RoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/<PREFIXO>-scheduler-role",
+    "RetryPolicy": {
+      "MaximumRetryAttempts": 2,
+      "MaximumEventAgeInSeconds": 3600
+    },
+    "Input": "{\"Entries\":[{\"Source\":\"integracao.lab01.pedidos\",\"DetailType\":\"order.created\",\"EventBusName\":\"<PREFIXO>-bus\",\"Detail\":\"{\\\"schemaVersion\\\":\\\"1.0\\\",\\\"correlationId\\\":\\\"lab01-sched-<aws.scheduler.execution-id>\\\",\\\"eventType\\\":\\\"order.created\\\",\\\"occurredAt\\\":\\\"<aws.scheduler.scheduled-time>\\\",\\\"data\\\":{\\\"orderId\\\":\\\"order-sched\\\",\\\"amount\\\":99.9}}\"}]}"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source": ["integracao.lab01.pedidos"],
+  "detail-type": ["order.paid"],
+  "detail": {
+    "data": {
+      "amount": [{ "numeric": [">", 0] }]
+    }
+  }
+}

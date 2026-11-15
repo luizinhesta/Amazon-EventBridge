@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PutEventsNoBusDoLab",
+      "Effect": "Allow",
+      "Action": "events:PutEvents",
+      "Resource": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:event-bus/<PREFIXO>-bus"
+    },
+    {
+      "Sid": "GravarEAtualizarRuns",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem"
+      ],
+      "Resource": "arn:aws:dynamodb:<REGIAO>:<ACCOUNT_ID>:table/<PREFIXO>-runs"
+    }
+  ]
+}

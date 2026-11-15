@@ -1,0 +1,8 @@
+{
+  "ArchiveName": "<PREFIXO>-archive",
+  "EventSourceArn": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:event-bus/<PREFIXO>-bus",
+  "RetentionDays": 7,
+  "EventPattern": {
+    "source": ["integracao.lab01.pedidos"]
+  }
+}

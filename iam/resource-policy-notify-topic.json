@@ -1,0 +1,43 @@
+{
+  "Version": "2008-10-17",
+  "Id": "<PREFIXO>-notify-topic-policy",
+  "Statement": [
+    {
+      "Sid": "__default_statement_ID",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": [
+        "SNS:GetTopicAttributes",
+        "SNS:SetTopicAttributes",
+        "SNS:AddPermission",
+        "SNS:RemovePermission",
+        "SNS:DeleteTopic",
+        "SNS:Subscribe",
+        "SNS:ListSubscriptionsByTopic",
+        "SNS:Publish"
+      ],
+      "Resource": "arn:aws:sns:<REGIAO>:<ACCOUNT_ID>:<PREFIXO>-notify-topic",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceOwner": "<ACCOUNT_ID>"
+        }
+      }
+    },
+    {
+      "Sid": "PermitirEventBridgeRuleCancelledPublicar",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+      },
+      "Action": "sns:Publish",
+      "Resource": "arn:aws:sns:<REGIAO>:<ACCOUNT_ID>:<PREFIXO>-notify-topic",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:rule/<PREFIXO>-bus/<PREFIXO>-rule-cancelled"
+        }
+      }
+    }
+  ]
+}

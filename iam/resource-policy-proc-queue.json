@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Id": "<PREFIXO>-proc-queue-policy",
+  "Statement": [
+    {
+      "Sid": "PermitirEventBridgeRuleCreatedEnviarMensagem",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:<REGIAO>:<ACCOUNT_ID>:<PREFIXO>-proc-queue",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:rule/<PREFIXO>-bus/<PREFIXO>-rule-created"
+        }
+      }
+    }
+  ]
+}

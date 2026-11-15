@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--
+    CSP: scripts e estilos somente do mesmo dominio (sem inline). connect-src permite apenas a
+    HTTP API (execute-api) e o dominio do Cognito. Se usar dominio proprio na API ou no Cognito,
+    inclua-o em connect-src.
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://*.execute-api.us-east-1.amazonaws.com https://*.amazoncognito.com; base-uri 'none'; form-action 'self'" />
+  <meta name="referrer" content="no-referrer" />
+  <title>LAB-01 — Central de Eventos (EventBridge)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>LAB-01 — Central de Eventos de Pedidos</h1>
+    <p class="foco">Serviço em foco: <strong>Amazon EventBridge</strong> (bus, rules, targets, Input Transformer, Scheduler, Archive/Replay, DLQ de target)</p>
+    <p id="modo-banner" class="banner-demo" hidden>MODO DEMONSTRAÇÃO — dados sintéticos, não refletem a AWS</p>
+  </header>
+
+  <main>
+    <section class="painel" id="painel-auth" aria-labelledby="titulo-auth">
+      <h2 id="titulo-auth">Sessão</h2>
+      <div class="auth-linha">
+        <div>
+          <p id="auth-usuario" class="auth-usuario">Não autenticado</p>
+          <p id="auth-perfil" class="auth-detalhe"></p>
+          <p id="auth-expira" class="auth-detalhe"></p>
+        </div>
+        <div class="controles">
+          <button id="btn-login" type="button">Entrar com Cognito</button>
+          <button id="btn-logout" type="button" class="secundario" hidden>Sair</button>
+        </div>
+      </div>
+      <p id="auth-mensagem" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="painel">
+      <h2>Disparar cenário real</h2>
+      <p class="instrucao">
+        Publica eventos sintéticos no barramento via <code>PutEvents</code>. Somente o perfil
+        <strong>operador</strong> pode publicar (validado no backend). Aceite no bus <strong>não</strong>
+        garante entrega aos targets.
+      </p>
+      <div class="controles">
+        <label for="cenario">Cenário</label>
+        <select id="cenario" aria-label="Selecionar cenário de teste">
+          <option value="happy">Fluxo completo (created, paid, cancelled, payment.failed)</option>
+          <option value="single">Somente order.created</option>
+          <option value="nomatch">No match (order.unknown — nenhuma rule corresponde)</option>
+        </select>
+        <button id="btn-disparar" type="button">Disparar teste</button>
+      </div>
+      <p id="status-disparo" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="painel">
+      <h2>Métricas</h2>
+      <h3>Execuções do laboratório</h3>
+      <div id="metricas" class="metricas">
+        <div class="metrica"><span class="rotulo">Execuções</span><span id="m-total" class="valor">—</span></div>
+        <div class="metrica"><span class="rotulo">Eventos aceitos no bus</span><span id="m-aceitas" class="valor">—</span></div>
+        <div class="metrica"><span class="rotulo">Falhas na publicação</span><span id="m-falhas" class="valor">—</span></div>
+        <div class="metrica"><span class="rotulo">DLQ de target (mensagens)</span><span id="m-dlq" class="valor">—</span></div>
+      </div>
+      <h3>Estado observado por execução</h3>
+      <div id="m-estados" class="chips"><span class="vazio">—</span></div>
+      <h3>Métricas do EventBridge por rule <span id="m-eb-janela" class="instrucao"></span></h3>
+      <p id="m-eb-aviso" class="instrucao"></p>
+      <div class="tabela-rolavel">
+        <table id="tabela-eb" aria-label="Métricas do EventBridge por rule">
+          <thead id="eb-head"></thead>
+          <tbody id="eb-body"><tr><td class="vazio">—</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="painel">
+      <h2>Linha do tempo de execuções</h2>
+      <p class="instrucao">
+        O estado vem das evidências encontradas (DynamoDB e CloudWatch Logs), nunca do aceite no bus.
+        O destino SNS não tem evidência automática: confirme pelo e-mail.
+      </p>
+      <div class="tabela-rolavel">
+        <table id="tabela-runs" aria-label="Execuções">
+          <thead>
+            <tr>
+              <th>correlationId</th>
+              <th>Cenário</th>
+              <th>Data/hora</th>
+              <th>Aceitos</th>
+              <th>Falhas pub.</th>
+              <th>Estado observado</th>
+              <th>Evidências</th>
+            </tr>
+          </thead>
+          <tbody id="runs-body">
+            <tr><td colspan="7" class="vazio">Nenhuma execução carregada.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>LAB-01 — projeto independente. Recursos <code>integracao-lab01-*</code>. Dados sintéticos, sem PII.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

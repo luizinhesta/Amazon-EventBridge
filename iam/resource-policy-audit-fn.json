@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "PermitirEventBridgeRulePaidInvocar",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+      },
+      "Action": "lambda:InvokeFunction",
+      "Resource": "arn:aws:lambda:<REGIAO>:<ACCOUNT_ID>:function:<PREFIXO>-audit-fn",
+      "Condition": {
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:events:<REGIAO>:<ACCOUNT_ID>:rule/<PREFIXO>-bus/<PREFIXO>-rule-paid"
+        }
+      }
+    }
+  ]
+}

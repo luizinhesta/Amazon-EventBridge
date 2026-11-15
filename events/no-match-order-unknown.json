@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "1.0",
+  "correlationId": "lab01-run-sample04",
+  "eventType": "order.unknown",
+  "occurredAt": "2026-11-03T20:03:00Z",
+  "data": { "orderId": "order-0004", "amount": 10.00 }
+}

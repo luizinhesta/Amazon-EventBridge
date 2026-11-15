@@ -1,0 +1,42 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "LerTabelaDeRuns",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:GetItem"
+      ],
+      "Resource": "arn:aws:dynamodb:<REGIAO>:<ACCOUNT_ID>:table/<PREFIXO>-runs"
+    },
+    {
+      "Sid": "LerLogsDoTargetDeLogs",
+      "Effect": "Allow",
+      "Action": "logs:FilterLogEvents",
+      "Resource": [
+        "arn:aws:logs:<REGIAO>:<ACCOUNT_ID>:log-group:/aws/events/<PREFIXO>",
+        "arn:aws:logs:<REGIAO>:<ACCOUNT_ID>:log-group:/aws/events/<PREFIXO>:*"
+      ]
+    },
+    {
+      "Sid": "LerMetricasDoCloudWatch",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:ListMetrics",
+        "cloudwatch:GetMetricData"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "LerProfundidadeDaDlqDeTarget",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:GetQueueUrl",
+        "sqs:GetQueueAttributes"
+      ],
+      "Resource": "arn:aws:sqs:<REGIAO>:<ACCOUNT_ID>:<PREFIXO>-target-dlq"
+    }
+  ]
+}

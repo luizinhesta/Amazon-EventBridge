@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PermitirEventBridgeGravarNoLogGroupDoLab",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+          "events.amazonaws.com",
+          "delivery.logs.amazonaws.com"
+        ]
+      },
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:<REGIAO>:<ACCOUNT_ID>:log-group:/aws/events/<PREFIXO>:*"
+    }
+  ]
+}
